@@ -1,0 +1,450 @@
+import java.io.*;
+import javax.swing.* ;
+import java.awt.* ;
+import java.util.* ;
+import javax.swing.border.Border ;
+import java.awt.event.ActionEvent ;
+import java.awt.event.ActionListener ;
+ 
+class File extends JFrame implements ActionListener
+{
+    JLabel lb = new JLabel() ;
+    boolean choice = true ; 
+    String S = "" ;
+    int arr1[] ;
+    void FileWrite ( String str1 , int arr[] , int n )
+    {
+        if( n == 1 )
+        {
+            S = "NWH.txt" ;
+        }
+        if( n == 2 )
+        {
+            S = "Tonic.txt" ; 
+        }
+        if( n == 3 )
+        {
+            S = "Pari.txt" ;
+        }
+        arr1 = arr ;
+        try
+        {
+            FileWriter fl = new FileWriter(S,true) ;
+            BufferedWriter bw = new BufferedWriter(fl) ;
+            
+            String str = "Your selected seats are :" ;
+            String s = str1 + " " ;
+            for( int i = 0 ; i < arr.length ; i ++ )
+            {
+                if( arr[i] <= 10 )
+                {
+                    s= s + Integer.toString(arr[i]) + " " ;
+                    str = str + " " + Integer.toString(arr[i]) + "A" ;
+                }
+                else if( arr[i] <= 20 )
+                {
+                    s=s + Integer.toString(arr[i]) + " " ;
+                    str = str + " " + Integer.toString(arr[i]-10) + "B" ;
+                }
+                else
+                {
+                    if ( arr[i] <= 25 )
+                    {
+                        s=s + Integer.toString(arr[i]) + " " ;
+                        str = str + " " + Integer.toString(arr[i]-20) + "C" ;
+                    }
+                    else if ( arr[i] <= 30 )
+                    {
+                        s= s + Integer.toString(arr[i]) + " " ;
+                        str = str + " " + Integer.toString(arr[i]-20) + "D" ;
+                    }
+                    else if ( arr[i] <= 35 )
+                    {
+                        s=s+Integer.toString(arr[i]) + " " ;
+                        str = str + " " + Integer.toString(arr[i]-20) + "E" ;
+                    }
+                    else
+                    {
+                        s=s+Integer.toString(arr[i]) + " " ;
+                        str = str + " " + Integer.toString(arr[i]-20) + "F" ;
+                    }
+                }
+                str = i < arr.length - 1 ? str + ", " : str ;
+            }
+            bw.write(s) ;
+            bw.newLine() ;
+            bw.flush() ;
+            bw.close() ;
+            
+            ImageIcon bg = new ImageIcon("BG_2.png") ;
+            //lb.setText("Screen") ;
+            lb.setIcon(bg) ;
+            lb.setText(str) ;
+            lb.setHorizontalTextPosition(JLabel.CENTER) ;
+            lb.setVerticalTextPosition(JLabel.TOP) ;
+            lb.setForeground(new Color(0xf70707)) ;
+            lb.setFont(new Font("MV Boli",Font.BOLD,15)) ;
+            lb.setIconTextGap(-40) ;
+            lb.setVerticalAlignment(JLabel.CENTER) ;
+            lb.setHorizontalAlignment(JLabel.CENTER) ;
+            lb.setBounds(0,-30,640,480) ;
+            
+            JButton btn = new JButton("Back to Main Screen") ;
+            btn.setBounds(360,360,250,40) ;
+            btn.setFont(new Font("MV Boli",Font.BOLD,20)) ;
+            btn.addActionListener(this) ;
+            btn.setFocusable(false) ;
+            btn.setVisible(true) ;
+            btn.setForeground(Color.white) ;
+            btn.setBackground(new Color(0xff3300)) ;
+            btn.setBorder(BorderFactory.createEtchedBorder()) ;
+        
+            this.setTitle("Movie Mania") ;
+            //this.setLayout(null) ;
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+            //this.setSize(655,458) ;
+            this.setResizable(true) ;
+            this.setVisible(true) ;
+        
+            this.setIconImage((new ImageIcon("LOGO.png")).getImage()) ;
+            
+            this.add(btn) ;
+            this.add(lb) ;
+            this.pack() ;
+            
+            int arr1[] = new int[40] ;
+            FileRead(arr1,n) ;
+            int c = 0 ; 
+            for ( int i = 0 ; i < 40 ; i ++ )
+            {
+                if( arr1[i] != 0 )
+                {
+                    c ++ ;
+                }
+            }
+            if( c == 40 )
+            {
+                fl = new FileWriter("Ticket_new.txt") ;
+                bw = new BufferedWriter(fl) ;
+            }
+            else
+            {
+                fl = new FileWriter("Ticket_new.txt",true) ;
+                bw = new BufferedWriter(fl) ;
+            }
+            bw.close() ;
+            choice = true ;
+        }
+        catch ( Exception e ) 
+        { 
+            System.out.println(e);
+        }
+    }
+    void FileWriteadv ( String str1 , int arr[] , int n )
+    {
+        arr1 = arr ;
+        if( n == 1 )
+        {
+            S = "NWH.txt" ;
+        }
+        if( n == 2 )
+        {
+            S = "Tonic.txt" ; 
+        }
+        if( n == 3 )
+        {
+            S = "Pari.txt" ;
+        }
+        try
+        {
+            
+            String str = "Your cancelled selected seats are :" ;
+            
+            for( int i = 0 ; i < arr.length ; i ++ )
+            {
+                if( arr[i] <= 10 )
+                {
+                    str = str + " " + Integer.toString(arr[i]) + "A" ;
+                }
+                else if( arr[i] <= 20 )
+                {
+                    str = str + " " + Integer.toString(arr[i]-10) + "B" ;
+                }
+                else
+                {
+                    if ( arr[i] <= 25 )
+                    {
+                        str = str + " " + Integer.toString(arr[i]-20) + "C" ;
+                    }
+                    else if ( arr[i] <= 30 )
+                    {
+                        str = str + " " + Integer.toString(arr[i]-20) + "D" ;
+                    }
+                    else if ( arr[i] <= 35 )
+                    {
+                        str = str + " " + Integer.toString(arr[i]-20) + "E" ;
+                    }
+                    else
+                    {
+                        str = str + " " + Integer.toString(arr[i]-20) + "F" ;
+                    }
+                }
+                str = i < arr.length - 1 ? str + ", " : str ;
+            }
+            
+            String x = "" ;
+            String arr2[] = new String[40] ;
+            FileReadarr(arr2) ;
+            int c = 0 ;
+            FileWriter fl = new FileWriter(S,false) ;
+            BufferedWriter bw = new BufferedWriter(fl) ;
+            while( arr2[c] != null )
+            {
+                if( arr2[c].indexOf(str1) == -1 )
+                {
+                    bw.write(arr2[c]) ;
+                    bw.newLine() ;
+                    bw.flush() ;
+                    bw.close() ;
+                    fl = new FileWriter(S,true) ;
+                    bw = new BufferedWriter(fl) ;
+                }
+                else
+                {
+                    x = arr2[c] ;
+                }
+                c++ ;
+            }
+            
+            String s = "" ;
+            StringTokenizer ST = new StringTokenizer(x.trim()) ;
+            while ( ST.hasMoreTokens() )
+            {
+                c = 0 ;
+                String STR = ST.nextToken() ;
+                for( int i = 0 ; i < arr.length ; i ++ )
+                {
+                    if( Integer.toString(arr[i]).equals(STR) )
+                    {
+                        c++ ;
+                    }
+                }
+                if ( c == 0 )
+                {
+                    s = s + STR + " " ;
+                }
+            }
+            bw.write(s) ;
+            bw.newLine() ;
+            bw.flush() ;
+            bw.close() ;
+            
+            ImageIcon bg = new ImageIcon("BG_2.png") ;
+            //lb.setText("Screen") ;
+            lb.setIcon(bg) ;
+            lb.setText(str) ;
+            lb.setHorizontalTextPosition(JLabel.CENTER) ;
+            lb.setVerticalTextPosition(JLabel.TOP) ;
+            lb.setForeground(new Color(0xf70707)) ;
+            lb.setFont(new Font("MV Boli",Font.BOLD,15)) ;
+            lb.setIconTextGap(-40) ;
+            lb.setVerticalAlignment(JLabel.CENTER) ;
+            lb.setHorizontalAlignment(JLabel.CENTER) ;
+            lb.setBounds(0,-30,640,480) ;
+            
+            JButton btn = new JButton("Back to Main Screen") ;
+            btn.setBounds(360,360,250,40) ;
+            btn.setFont(new Font("MV Boli",Font.BOLD,20)) ;
+            btn.addActionListener(this) ;
+            btn.setFocusable(false) ;
+            btn.setVisible(true) ;
+            btn.setForeground(Color.white) ;
+            btn.setBackground(new Color(0xff3300)) ;
+            btn.setBorder(BorderFactory.createEtchedBorder()) ;
+        
+            this.setTitle("Movie Mania") ;
+            //this.setLayout(null) ;
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+            //this.setSize(655,458) ;
+            this.setResizable(true) ;
+            this.setVisible(true) ;
+        
+            this.setIconImage((new ImageIcon("LOGO.png")).getImage()) ;
+            
+            this.add(btn) ;
+            this.add(lb) ;
+            this.pack() ;
+            /*
+            int arr1[] = new int[40] ;
+            FileRead(arr1) ;
+            int c = 0 ; 
+            for ( int i = 0 ; i < 40 ; i ++ )
+            {
+                if( arr1[i] != 0 )
+                {
+                    c ++ ;
+                }
+            }
+            if( c == 40 )
+            {
+                fl = new FileWriter("Ticket_new.txt") ;
+                bw = new BufferedWriter(fl) ;
+            }
+            else
+            {
+                fl = new FileWriter("Ticket_new.txt",true) ;
+                bw = new BufferedWriter(fl) ;
+            }*/
+            bw.close() ;
+            choice = false ;
+        }
+        catch ( Exception e ) 
+        { 
+            System.out.println(e);
+        }
+    }
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if  (choice) 
+        {
+            JOptionPane.showMessageDialog(null, "Total cost = ₹" + Double.toString(80.0 * arr1.length) ,"COST" , JOptionPane.INFORMATION_MESSAGE ) ;
+            JOptionPane.showMessageDialog(null,"Your seats have been booked successfully" ,"Thank you !" , JOptionPane.INFORMATION_MESSAGE ) ;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Amount Returned = ₹" + Double.toString(40.0 * arr1.length) ,"Amount Returned" , JOptionPane.INFORMATION_MESSAGE ) ;
+            JOptionPane.showMessageDialog(null,"Your seats have been cancelled successfully" ,"Thank you !" , JOptionPane.INFORMATION_MESSAGE ) ;
+            choice = true ;
+        }
+        this.dispose() ;
+        new Welcome() ;
+    }
+    void FileRead (int arr[],int x)
+    {
+        if( x == 1 )
+        {
+            S = "NWH.txt" ;
+        }
+        if( x == 2 )
+        {
+            S = "Tonic.txt" ; 
+        }
+        if( x == 3 )
+        {
+            S = "Pari.txt" ;
+        }
+        try
+        {
+            FileReader fl = new FileReader(S) ;
+            BufferedReader br = new BufferedReader(fl)  ;
+            String line ;
+            int c = 0 ;
+            while( (line = br.readLine()) != null )
+            {
+                StringTokenizer st = new StringTokenizer(line) ;
+                while ( st.hasMoreTokens() )
+                {
+                    try
+                    {
+                        String str = st.nextToken() ;
+                        int n = Integer.parseInt(str) ;
+                        arr[c++] = n ;
+                    }
+                    catch(NumberFormatException e)
+                    {
+                        continue ;
+                    }
+                }
+            }
+            br.close() ;
+        }
+        catch ( IOException e )
+        {
+            System.out.println(e);
+        }
+    }
+    void FileReadadv (String s , int arr[] , int x)
+    {
+        if( x == 1 )
+        {
+            S = "NWH.txt" ;
+        }
+        if( x == 2 )
+        {
+            S = "Tonic.txt" ; 
+        }
+        if( x == 3 )
+        {
+            S = "Pari.txt" ;
+        }
+        try
+        {
+            FileReader fl = new FileReader(S) ;
+            BufferedReader br = new BufferedReader(fl)  ;
+            String line , str="" , sn="" ;
+            int c = 0 ;
+            while( (line = br.readLine()) != null )
+            {
+                StringTokenizer st = new StringTokenizer(line) ;
+                sn = "" ;
+                while ( st.hasMoreTokens() )
+                {
+                    try
+                    {
+                        str = st.nextToken() ;
+                        int n = Integer.parseInt(str) ;
+                        arr[c++] = n ;
+                    }
+                    catch(NumberFormatException e)
+                    {
+                        if( sn.equals("") )
+                        {
+                            sn = sn + str ;
+                        }
+                        else
+                        {
+                            sn = sn + " " + str ;
+                        }
+                    }
+                }
+                if( !sn.equals(s) )
+                {
+                    for(int i = 0 ; i < c ; i ++)
+                    {
+                        arr[i] = 0 ;
+                    }
+                    c = 0 ;
+                }
+                else
+                {
+                    break ;
+                }
+            }
+            br.close() ;
+        }
+        catch ( IOException e )
+        {
+            System.out.println(e);
+        }
+    }
+    void FileReadarr (String arr[])
+    {
+        try
+        {
+            FileReader fl = new FileReader(S) ;
+            BufferedReader br = new BufferedReader(fl)  ;
+            String line ;
+            int c = 0 ;
+            while( (line = br.readLine()) != null )
+            {
+                arr[c++] = line ;
+            }
+            br.close() ;
+        }
+        catch ( IOException e )
+        {
+            System.out.println(e);
+        }
+    }
+}

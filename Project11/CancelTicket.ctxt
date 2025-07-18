@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=CancelTicket
+comment1.params=str1\ n1\ x1
+comment1.target=CancelTicket(java.lang.String,\ int,\ int)
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=3

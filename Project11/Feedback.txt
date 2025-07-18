@@ -1,0 +1,117 @@
+import javax.swing.* ;
+import java.awt.* ;
+import java.util.* ;
+import javax.swing.border.Border ;
+import java.awt.event.ActionEvent ;
+import java.awt.event.ActionListener ;
+ 
+class Feedback extends JFrame implements ActionListener
+{
+    JLabel lb = new JLabel() ;
+    JButton bt[] = new JButton[5] ;
+    JButton btn , btn1;
+    Feedback ()
+    {
+        ImageIcon img = new ImageIcon("Star_2.png") ;
+        int x = 10 , y = 0 ;
+        for( int i = 0 ; i < 5 ; i++ )
+        {
+            bt[i] = new JButton() ;
+            bt[i].setIcon(img) ;
+            bt[i].setBounds((135+x),(50),64,64) ;
+            bt[i].setFont(new Font("MV Boli",Font.BOLD,20)) ;
+            bt[i].addActionListener(this) ;
+            bt[i].setFocusable(false) ;
+            bt[i].setVisible(true) ;
+            bt[i].setForeground(Color.white) ;
+            bt[i].setBackground(new Color(0xffffff)) ; 
+            //bt[i].setBorder(BorderFactory.createEtchedBorder()) ;
+            x += 75 ;
+        }
+        
+        btn = new JButton("Back to Main Screen") ;
+        btn.setBounds(360,360,250,40) ;
+        btn.setFont(new Font("MV Boli",Font.BOLD,20)) ;
+        btn.addActionListener(this) ;
+        btn.setFocusable(false) ;
+        btn.setVisible(true) ;
+        btn.setForeground(Color.white) ;
+        btn.setBackground(new Color(0xff3300)) ;
+        btn.setBorder(BorderFactory.createEtchedBorder()) ;
+        
+        btn1 = new JButton("Clear Rating") ;
+        btn1.setBounds(210,130,250,40) ;
+        btn1.setFont(new Font("MV Boli",Font.BOLD,20)) ;
+        btn1.addActionListener(this) ;
+        btn1.setFocusable(false) ;
+        btn1.setVisible(true) ;
+        btn1.setForeground(Color.white) ;
+        btn1.setBackground(new Color(0xff3300)) ;
+        btn1.setBorder(BorderFactory.createEtchedBorder()) ;
+        
+        ImageIcon bg = new ImageIcon("BG_2.png") ;
+         
+        lb.setText("Feedback") ;
+        //lb.setText("Screen") ;
+        lb.setIcon(bg) ;
+        
+        lb.setHorizontalTextPosition(JLabel.CENTER) ;
+        lb.setVerticalTextPosition(JLabel.TOP) ;
+        lb.setForeground(new Color(0xf70707)) ;
+        lb.setFont(new Font("MV Boli",Font.BOLD,25)) ;
+        lb.setIconTextGap(-40) ;
+        lb.setVerticalAlignment(JLabel.CENTER) ;
+        lb.setHorizontalAlignment(JLabel.CENTER) ;
+        lb.setBounds(0,-30,640,480) ;
+        
+        this.setTitle("Movie Mania") ;
+        //this.setLayout(null) ;
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+        //this.setSize(655,458) ;
+        this.setResizable(false) ;
+        this.setVisible(true) ;
+        
+        this.setIconImage((new ImageIcon("LOGO.png")).getImage()) ;
+        
+        for( int i = 0 ; i < 5 ; i++ )
+        {
+            this.add(bt[i]) ;
+        } 
+        this.add(btn) ;
+        this.add(btn1) ;
+        this.add(lb) ;
+        this.pack() ;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        ImageIcon img = new ImageIcon("Star1.png") ;
+        for( int i = 0 ; i < 5 ; i ++ )
+        {
+            if ( e.getSource() == bt[i] )
+            {
+                for( int j = 0 ; j < 5 ; j ++ )
+                {
+                    bt[j].setIcon(new ImageIcon("Star_2.png")) ;
+                }
+                for( int j = 0 ; j <= i ; j ++ )
+                {
+                    bt[j].setIcon(img) ;
+                }
+            }
+        }
+        if( e.getSource() == btn )
+        {
+            this.dispose() ;
+            JOptionPane.showMessageDialog(null,"Thank you for your Feedback!","Thank you" , JOptionPane.INFORMATION_MESSAGE ) ;
+            new Welcome() ;
+        }
+        if( e.getSource() == btn1 )
+        {
+            for( int j = 0 ; j < 5 ; j ++ )
+            {
+                bt[j].setIcon(new ImageIcon("Star_2.png")) ;
+            }
+        }
+    }
+}

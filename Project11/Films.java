@@ -1,0 +1,124 @@
+import javax.swing.* ;
+import java.awt.* ;
+import java.util.* ;
+import javax.swing.border.Border ;
+import java.awt.event.ActionEvent ;
+import java.awt.event.ActionListener ;
+
+class Films extends JFrame implements ActionListener
+{
+    JLabel lb = new JLabel() ;
+    JButton btn1, btn2, btn3 ;
+    String str ;
+    int n ;
+    boolean x ;
+    Films(String str1 , int n1 , boolean ch)
+    {
+        str = str1 ;
+        n = n1 ;
+        x = ch ;
+        
+        ImageIcon img1 = new ImageIcon("Film1.png") ;
+        ImageIcon img2 = new ImageIcon("Film2.png") ;
+        ImageIcon img3 = new ImageIcon("Film3_2.png") ;
+        
+        btn1 = new JButton() ;
+        btn1.setIcon(img1) ;
+        btn1.setBounds(15,55,200,300) ;
+        btn1.setFont(new Font("MV Boli",Font.BOLD,20)) ;
+        btn1.addActionListener(this) ;
+        btn1.setFocusable(false) ;
+        btn1.setVisible(true) ;
+        btn1.setForeground(Color.white) ;
+        btn1.setBackground(Color.white) ;
+        
+        btn2 = new JButton() ;
+        btn2.setIcon(img2) ;
+        btn2.setBounds(220,55,200,300) ;
+        btn2.setFont(new Font("MV Boli",Font.BOLD,20)) ;
+        btn2.addActionListener(this) ;
+        btn2.setFocusable(false) ;
+        btn2.setVisible(true) ;
+        btn2.setForeground(Color.white) ;
+        btn2.setBackground(Color.white) ;
+        
+        btn3 = new JButton() ;
+        btn3.setIcon(img3) ;
+        btn3.setBounds(425,55,200,300) ;
+        btn3.setFont(new Font("MV Boli",Font.BOLD,20)) ;
+        btn3.addActionListener(this) ;
+        btn3.setFocusable(false) ;
+        btn3.setVisible(true) ;
+        btn3.setForeground(Color.white) ;
+        btn3.setBackground(Color.white) ;
+        
+        ImageIcon bg = new ImageIcon("BG_2.png") ;
+         
+        lb.setText("Choose your Film") ;
+        //lb.setText("Screen") ;
+        lb.setIcon(bg) ;
+        
+        lb.setHorizontalTextPosition(JLabel.CENTER) ;
+        lb.setVerticalTextPosition(JLabel.TOP) ;
+        lb.setForeground(new Color(0xf70707)) ;
+        lb.setFont(new Font("MV Boli",Font.BOLD,25)) ;
+        lb.setIconTextGap(-40) ;
+        lb.setVerticalAlignment(JLabel.CENTER) ;
+        lb.setHorizontalAlignment(JLabel.CENTER) ;
+        lb.setBounds(0,-30,640,480) ;
+        
+        this.setTitle("Movie Mania") ;
+        //this.setLayout(null) ;
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+        //this.setSize(655,458) ;
+        this.setResizable(false) ;
+        this.setVisible(true) ;
+        
+        this.setIconImage((new ImageIcon("LOGO.png")).getImage()) ;
+        this.add(btn1) ;
+        this.add(btn2) ;
+        this.add(btn3) ;
+        this.add(lb) ;
+        this.pack() ;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if( e.getSource() == btn1 )
+        {
+            this.dispose() ;
+            if ( x )
+            {
+                new Seats( str , n , 1 );
+            }
+            else
+            {
+                new CancelTicket(str , n , 1) ;
+            }
+        }
+        if( e.getSource() == btn2 )
+        {
+            this.dispose() ;
+            if ( x )
+            {
+                new Seats( str , n , 2 );
+            }
+            else
+            {
+                new CancelTicket(str , n , 2) ;
+            }
+        }
+        if( e.getSource() == btn3 )
+        {
+            this.dispose() ;
+            if ( x )
+            {
+                new Seats( str , n , 3 );
+            }
+            else
+            {
+                new CancelTicket(str , n , 3 ) ;
+            }
+        }
+    }
+}

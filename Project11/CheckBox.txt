@@ -1,0 +1,18 @@
+import javax.swing.* ;
+
+class CheckBox
+{
+    void main()
+    {
+        String str[] = {"18:00","22:00"} ;
+        int ans = JOptionPane.showOptionDialog(null,"Which show do you want ?","TIME",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE,null,str,0) ;
+        if( ans == 0 )
+        {
+            System.out.println("You chose : "+str[0]+" show") ;
+        }
+        if( ans == 1 )
+        {
+            System.out.println("You chose : "+str[1]+" show") ;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Films
+comment1.params=str1\ n1\ ch
+comment1.target=Films(java.lang.String,\ int,\ boolean)
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=3

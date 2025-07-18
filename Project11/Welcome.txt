@@ -1,0 +1,116 @@
+import javax.swing.* ;
+import java.awt.* ;
+import java.util.* ;
+import javax.swing.border.Border ;
+import java.awt.event.ActionEvent ;
+import java.awt.event.ActionListener ;
+ 
+class Welcome extends JFrame implements ActionListener
+{
+    JButton bt[] = new JButton[5] ;
+    JLabel lb = new JLabel() ;
+    Welcome()
+    {
+        
+        bt[0] = new JButton("Select Ticket") ;
+        bt[1] = new JButton("Cancel Ticket") ;
+        bt[2] = new JButton("Snacks") ;
+        bt[3] = new JButton("Feedback") ;
+        bt[4] = new JButton("Exit") ;
+        int x = 10 , y = 0 ;
+        for( int i = 0 ; i < 5 ; i++ )
+        {
+            bt[i].setBounds((200),(50+y),250,45) ;
+            bt[i].setFont(new Font("MV Boli",Font.BOLD,20)) ;
+            bt[i].addActionListener(this) ;
+            bt[i].setFocusable(false) ;
+            bt[i].setVisible(true) ;
+            bt[i].setForeground(Color.white) ;
+            bt[i].setBackground(new Color(0xff3300)) ;
+            bt[i].setBorder(BorderFactory.createEtchedBorder()) ;
+            y += 60 ;
+        }
+        
+        
+        ImageIcon bg = new ImageIcon("BG_2.png") ;
+         
+        lb.setText("Welcome") ;
+        //lb.setText("Screen") ;
+        lb.setIcon(bg) ;
+        
+        lb.setHorizontalTextPosition(JLabel.CENTER) ;
+        lb.setVerticalTextPosition(JLabel.TOP) ;
+        lb.setForeground(new Color(0xf70707)) ;
+        lb.setFont(new Font("MV Boli",Font.BOLD,25)) ;
+        lb.setIconTextGap(-40) ;
+        lb.setVerticalAlignment(JLabel.CENTER) ;
+        lb.setHorizontalAlignment(JLabel.CENTER) ;
+        lb.setBounds(0,-30,640,480) ;
+        
+        this.setTitle("Movie Mania") ;
+        //this.setLayout(null) ;
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+        //this.setSize(655,458) ;
+        this.setResizable(false) ;
+        this.setVisible(true) ;
+        
+        this.setIconImage((new ImageIcon("LOGO.png")).getImage()) ;
+        
+        for( int i = 0 ; i < 5 ; i++ )
+        {
+            this.add(bt[i]) ;
+        }
+        this.add(lb) ;
+        this.pack() ;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if( e.getSource() == bt[0] )
+        {
+            String str1 = (JOptionPane.showInputDialog("Enter Your name :")) ;
+            
+            String str = (JOptionPane.showInputDialog("How Many Tickets Do You Want To Book ?(Cost : ₹80 per head)")) ;
+            if(str != null)
+            {
+                int n = Integer.parseInt(str) ;
+                this.dispose() ;
+                //Seats st = new Seats(str1 , n) ;
+                Films fl = new Films(str1 , n, true) ;
+            }
+        }
+        else if( e.getSource() == bt[1] )
+        {
+            String str1 = (JOptionPane.showInputDialog("Enter Your name :")) ;
+            
+            String str = (JOptionPane.showInputDialog("How Many Tickets Do You Want To Cancel ?(Return Amount : ₹40 per head)")) ;
+            if(str != null)
+            {
+                int n = Integer.parseInt(str) ;
+                this.dispose() ;
+                //CancelTicket ct = new CancelTicket(str1 , n) ;
+                Films fl = new Films(str1 , n, false) ;
+            }
+        }
+        else if (e.getSource() == bt[2])
+        {
+            this.dispose() ;
+            new Snacks() ;
+        }
+        else if( e.getSource() == bt[3] )
+        {
+            this.dispose() ;
+            new Feedback() ;
+        }
+        else if( e.getSource() == bt[4] )
+        {
+            ImageIcon icon = new ImageIcon("LOGO.png") ;
+            int ans = JOptionPane.showOptionDialog(null,"Do You Want to Exit ?","EXIT",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,icon,null,0) ;
+            if( ans == 0 )
+            {
+                this.dispose() ;
+                System.exit(0) ;
+            }
+        }
+    }
+}
