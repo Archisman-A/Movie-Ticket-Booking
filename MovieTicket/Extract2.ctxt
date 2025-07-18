@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Extract2
+comment1.params=
+comment1.target=void\ main()
+comment2.params=c\ d
+comment2.target=java.lang.String\ intersection(java.lang.String,\ java.lang.String)
+numComments=3
